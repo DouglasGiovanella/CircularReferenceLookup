@@ -11,8 +11,10 @@ dependency_graph = nx.DiGraph()
 
 # Função para extrair as dependências de um service
 def extract_dependencies(service_content):
-    pattern = re.compile(r'(?<!\w)([A-Z][a-zA-Z]+Service)\b')
-    return pattern.findall(service_content)
+    pattern = re.compile(r'\b(def\s+([A-Z][a-zA-Z]*)Service|([A-Z][a-zA-Z]*)\s+\w+)\b')
+    matches = pattern.findall(service_content)
+    # Extrai o nome do serviço da correspondência
+    return [match[1] or match[2] for match in matches]
 
 # Percorre os arquivos de service para construir o grafo de dependências
 for root, dirs, files in os.walk(SERVICES_PATH):
