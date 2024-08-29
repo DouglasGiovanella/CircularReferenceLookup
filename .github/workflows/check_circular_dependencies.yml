@@ -1,0 +1,26 @@
+name: Check Circular Dependencies in Grails Services
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  check-circular-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install networkx
+
+      - name: Run circular dependency check
+        run: python scripts/check_circular_dependencies.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
