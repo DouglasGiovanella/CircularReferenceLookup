@@ -18,9 +18,11 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install networkx
+        run: |
+          pip install networkx
+          pip install PyGithub  # Adicione esta linha para instalar o PyGithub
 
       - name: Run circular dependency check
-        run: python ../scripts/check_circular_dependencies.py
+        run: python scripts/check_circular_dependencies.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
