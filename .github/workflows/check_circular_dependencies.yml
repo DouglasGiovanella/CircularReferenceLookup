@@ -21,6 +21,6 @@ jobs:
         run: pip install networkx
 
       - name: Run circular dependency check
-        run: python ../scripts/check_circular_dependencies.py
+        run: python scripts/check_circular_dependencies.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
