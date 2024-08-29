@@ -4,7 +4,7 @@ import networkx as nx
 from github import Github
 
 # Caminho do diretório onde os services estão localizados
-SERVICES_PATH = 'domain/grails-app/services/'
+SERVICES_PATH = 'asaas/domain/grails-app/services/'
 
 # Inicializa o grafo para representar as dependências entre os services
 dependency_graph = nx.DiGraph()
