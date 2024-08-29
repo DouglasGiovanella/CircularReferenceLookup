@@ -42,7 +42,7 @@ if cycles:
     for cycle in cycles:
         comment_body += " -> ".join(cycle) + "\n"
 
-    pr.create_issue_comment(comment_body)
-    print("Circular dependencies found and commented on the PR.")
+    #pr.create_issue_comment(comment_body)
+    print("Circular dependencies found and commented on the PR." + comment_body)
 else:
     print("No circular dependencies found.")
