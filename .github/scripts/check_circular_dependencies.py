@@ -54,7 +54,19 @@ serviceFiles = glob.glob(os.path.join(serviceDirectory, '**/*Service.groovy'), r
 for filePath in serviceFiles:
     findDependencies(filePath)
 
+github_token = os.getenv('GITHUB_TOKEN')
+github = Github(github_token)
+repository = github.get_repo(os.getenv('GITHUB_REPOSITORY'))
+pr_number = os.getenv('GITHUB_REF').split('/')[-2]
+pr = repository.get_pull(int(pr_number))
+files_changed = pr.get_files()
+
+for file in pr.get_files():
+    print(file.filename)
+    print(repository.get_contents(file.filename))
+
 circularReferences = []
+
 for serviceName in dependenciesGraph:
     cycle = []
     if findCycleWithDepthFirstSearch(serviceName, cycle=cycle):
@@ -62,12 +74,6 @@ for serviceName in dependenciesGraph:
         circularReferences.append(cycle)
 
 if circularReferences:
-    github_token = os.getenv('GITHUB_TOKEN')
-    g = Github(github_token)
-    repo = g.get_repo(os.getenv('GITHUB_REPOSITORY'))
-    pr_number = os.getenv('GITHUB_REF').split('/')[-2]
-    pr = repo.get_pull(int(pr_number))
-
     comment_body = "### Circular Dependency Detected\n\n"
     comment_body += "The following circular dependencies were found in your changes:\n\n"
     for cycle in circularReferences:
