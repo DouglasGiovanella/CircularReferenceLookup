@@ -76,8 +76,7 @@ for serviceName in servicesChanged:
         circularReferences.append(cycle)
 
 if circularReferences:
-    comment_body = "### Circular Dependency Detected\n\n"
-    comment_body += "The following circular dependencies were found in your changes:\n\n"
+    comment_body = "### Encontrado referências circulares no arquivos alterados \n\n"
     for cycle in circularReferences:
         comment_body += " -> ".join(cycle) + "\n"
 
