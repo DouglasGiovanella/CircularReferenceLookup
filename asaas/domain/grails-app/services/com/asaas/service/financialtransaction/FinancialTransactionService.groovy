@@ -123,6 +123,7 @@ class FinancialTransactionService {
 
     def asaasErpAccountingStatementService
     def asyncActionService
+    def emailValidationService
     def customerCheckoutLimitService
     def customerDailyBalanceConsolidationRecalculateService
     def customerDailyPartialBalanceRecalculateService
