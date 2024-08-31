@@ -62,8 +62,7 @@ pr = repository.get_pull(int(pr_number))
 files_changed = pr.get_files()
 
 for file in pr.get_files():
-    print(file.filename)
-    print(repository.get_contents(file.filename))
+    print(file)
 
 circularReferences = []
 
