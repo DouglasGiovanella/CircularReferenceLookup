@@ -6,6 +6,7 @@ import grails.transaction.Transactional
 class Test1Service {
 
     def test2Service
+    def test1Service
     def joaoAA = 2
 
 }
