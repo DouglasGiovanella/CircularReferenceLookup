@@ -64,7 +64,7 @@ servicesChanged = []
 for file in pr.get_files():
     changed_file_name = os.path.splitext(os.path.basename(file.filename))[0]
     print(changed_file_name)
-    if changed_file_name.endswith('Service.groovy'):
+    if changed_file_name.endswith('Service'):
         servicesChanged.append(changed_file_name)
 
 circularReferences = []
