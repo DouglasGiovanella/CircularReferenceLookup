@@ -3,8 +3,8 @@ package com.asaas.service.pix
 import grails.transaction.Transactional
 
 @Transactional
-class Test2 {
+class Test3Service {
 
-    Test3 test3
+    def test1Service
 
 }
