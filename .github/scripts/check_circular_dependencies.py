@@ -47,7 +47,7 @@ def findDependencies(filePath):
             service_names += explicit_matches
 
         if service_names:
-            dependenciesGraph[extractServiceName(filePath)] = list(map(lambda x: x.title(), service_names))
+            dependenciesGraph[extractServiceName(filePath)] = list(map(lambda x: x[0].upper() + x[1:], service_names))
 
 serviceFiles = glob.glob(os.path.join(serviceDirectory, '**/*Service.groovy'), recursive=True)
 
