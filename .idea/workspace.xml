@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9bb2d8d7-9c82-443b-9de9-926f69c5463d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/check_circular_dependencies.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/check_circular_dependencies.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CircularReferenceLookup/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CircularReferenceLookup/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asaas/domain/grails-app/services/Test1.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asaas/domain/grails-app/services/Test2.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asaas/domain/grails-app/services/Test3.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/check_circular_dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/.github/scripts/check_circular_dependencies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/scripts/check_circular_dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/.github/scripts/check_circular_dependencies.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +28,7 @@
     "Python.check_circular_dependencies.executor": "Debug",
     "Python.dependency.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "test2",
+    "git-widget-placeholder": "test4",
     "last_opened_file_path": "/Users/douglasgiovanella/Documents/workspace/CircularReferenceLookup"
   }
 }]]></component>
