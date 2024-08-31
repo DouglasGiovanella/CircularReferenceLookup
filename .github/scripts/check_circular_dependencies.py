@@ -59,7 +59,7 @@ for serviceName in dependenciesGraph:
     cycle = []
     if findCycleWithDepthFirstSearch(serviceName, cycle=cycle):
         cycle.reverse()
-        circularReferences += cycle
+        circularReferences.append(cycle)
 
 if circularReferences:
     github_token = os.getenv('GITHUB_TOKEN')
