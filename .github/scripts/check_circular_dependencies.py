@@ -62,6 +62,7 @@ pr = repository.get_pull(int(pr_number))
 
 servicesChanged = []
 for file in pr.get_files():
+    print("Arquivo alterado: " + os.path.splitext(os.path.basename(file.filename))[0])
     servicesChanged.append(os.path.splitext(os.path.basename(file.filename))[0])
 
 circularReferences = []
