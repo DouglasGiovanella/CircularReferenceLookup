@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace CircularReferenceLookup {
-    internal static class Program {
+    internal static partial class Program {
 
         private static readonly List<string?> IgnoredServices = new() {
             "springSecurityService",
@@ -9,7 +10,10 @@ namespace CircularReferenceLookup {
         };
 
         private static async Task Main(string[] args) {
-            string[] files = Directory.GetFiles(@"C:\Users\Douglas Giovanella\Downloads\asaas-release", "*Service.groovy", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(
+                @"/Users/douglasgiovanella/Documents/workspace/asaas",
+                "*Service.groovy",
+                SearchOption.AllDirectories);
 
             Dictionary<string, List<string>> serviceReferences = await BuildServices(files);
 
@@ -31,41 +35,45 @@ namespace CircularReferenceLookup {
                 classFileReference[injectionName] = path;
             }
 
-            foreach ((string key, string value) in classFileReference) {
-                references[key] = await FindServicesInjections(value);
+            var tasks = new List<Task>();
+
+            foreach ((string key, string value) in classFileReference)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    var result = await FindServicesInjections(value);
+                    references[key] = result;
+                }));
             }
+
+            // Aguarda todas as tarefas serem concluídas
+            await Task.WhenAll(tasks);
 
             return references;
         }
 
-        private static async Task<List<string?>> FindServicesInjections(string servicePath) {
-            List<string?> services = new();
+        private static async Task<List<string>> FindServicesInjections(string servicePath) {
+            List<string> services = new();
 
-            string[] lines = await File.ReadAllLinesAsync(servicePath);
-            foreach (string line in lines) {
-                if (string.IsNullOrWhiteSpace(line)) continue;
+            string serviceContent = await File.ReadAllTextAsync(servicePath);
 
-                string sanitizedLine = line.Trim();
-                string? serviceName = TryExtractServiceName(sanitizedLine);
+            MatchCollection defMatches = MyRegex().Matches(serviceContent);
+            foreach (Match match in defMatches) {
+                services.Add(match.Groups[1].Value);
+            }
 
-                if (!string.IsNullOrEmpty(serviceName) && !IgnoredServices.Contains(serviceName)) services.Add(serviceName);
+            MatchCollection explicitMatches = MyRegex1().Matches(serviceContent);
+            foreach (Match match in explicitMatches) {
+                services.Add(match.Groups[1].Value);
             }
 
             return services;
         }
 
-        private static string? TryExtractServiceName(string sanitizedLine) {
-            string? serviceName = null;
+        [GeneratedRegex("def\\s+(\\w+)")]
+        private static partial Regex MyRegex();
 
-            if (sanitizedLine.StartsWith("def ") && sanitizedLine.EndsWith("Service")) {
-                // Bean injection
-                serviceName = sanitizedLine.Replace("def ", string.Empty);
-            } else if (sanitizedLine.Contains("applicationContext.")) {
-                // Context access
-                serviceName = sanitizedLine.Split("applicationContext.").Last().Split(".").First();
-            }
-
-            return serviceName?.Trim();
-        }
+        [GeneratedRegex("\\b\\w+Service\\s+(\\w+Service)\\b")]
+        private static partial Regex MyRegex1();
     }
 }
