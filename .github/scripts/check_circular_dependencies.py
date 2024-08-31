@@ -59,14 +59,14 @@ github = Github(github_token)
 repository = github.get_repo(os.getenv('GITHUB_REPOSITORY'))
 pr_number = os.getenv('GITHUB_REF').split('/')[-2]
 pr = repository.get_pull(int(pr_number))
-files_changed = pr.get_files()
 
+servicesChanged = []
 for file in pr.get_files():
-    print(file)
+    servicesChanged.append(os.path.splitext(os.path.basename(file.filename))[0])
 
 circularReferences = []
 
-for serviceName in dependenciesGraph:
+for serviceName in servicesChanged:
     cycle = []
     if findCycleWithDepthFirstSearch(serviceName, cycle=cycle):
         cycle.reverse()

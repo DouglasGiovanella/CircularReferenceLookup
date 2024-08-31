@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9bb2d8d7-9c82-443b-9de9-926f69c5463d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.github/scripts/check_circular_dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/.github/scripts/check_circular_dependencies.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
