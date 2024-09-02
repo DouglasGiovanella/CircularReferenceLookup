@@ -63,7 +63,6 @@ pr = repository.get_pull(int(pr_number))
 servicesChanged = []
 for file in pr.get_files():
     changed_file_name = os.path.splitext(os.path.basename(file.filename))[0]
-    print(changed_file_name)
     if changed_file_name.endswith('Service'):
         servicesChanged.append(changed_file_name)
 
@@ -78,7 +77,7 @@ for serviceName in servicesChanged:
 if circularReferences:
     comment_body = "### Encontrado referências circulares no arquivos alterados \n\n"
     for cycle in circularReferences:
-        comment_body += " -> ".join(cycle) + "\n"
+        comment_body += " -> ".join(cycle) + "\n\n"
 
     pr.create_issue_comment(comment_body)
     print("Circular dependencies found and commented on the PR." + comment_body)
