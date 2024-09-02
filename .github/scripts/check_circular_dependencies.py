@@ -77,7 +77,7 @@ for serviceName in servicesChanged:
 if circularReferences:
     comment_body = "### Encontrado referências circulares no arquivos alterados \n\n"
     for cycle in circularReferences:
-        comment_body += " -> ".join(cycle) + "\n"
+        comment_body += " -> ".join(cycle) + "\n\n"
 
     pr.create_issue_comment(comment_body)
     print("Circular dependencies found and commented on the PR." + comment_body)
